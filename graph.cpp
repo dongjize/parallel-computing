@@ -12,8 +12,7 @@ int nodesCount;
 
 int main(int argc, char** argv) {
 
-    double timeBegin, timeEnd;
-
+	double timeBegin, timeEnd;
 
 	int numThreads = omp_get_max_threads();
 
@@ -50,11 +49,11 @@ int main(int argc, char** argv) {
 		distance[a][b] = c;
 	}
 
-    timeBegin = omp_get_wtime();
+	timeBegin = omp_get_wtime();
 
 	//Floyd-Warshall
+#pragma omp parallel for num_threads(numThreads) schedule (dynamic)
 	for (int k = 1; k <= nodesCount; ++k) {
-#pragma omp parallel for num_threads(numThreads)
 		for (int i = 1; i <= nodesCount; ++i) {
 			if (distance[i][k] != NOT_CONNECTED) {
 				for (int j = 1; j <= nodesCount; ++j) {
@@ -80,10 +79,8 @@ int main(int argc, char** argv) {
 		}
 	}
 
-//	printf("%d\n", diameter);
-    timeEnd = omp_get_wtime();
-//	std::cout << "Running time is: " << omp_get_wtime() - wall_time << "s" << std::endl;
-    printf("%d %.16g\n", diameter, (timeEnd-timeBegin));
+	timeEnd = omp_get_wtime();
+	printf("%d %.16g\n", diameter, (timeEnd - timeBegin));
 	return 0;
 
 }

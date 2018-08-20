@@ -28,7 +28,7 @@ for i in range(1, N + 1):
 print(N)
 print(n_lines)
 
-with open('graph.txt', 'w') as f:
+with open('graph' + str(N) + '.txt', 'w') as f:
     f.write(str(N) + "\n")
     for line in lines:
         f.write(line)
