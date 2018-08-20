@@ -12,8 +12,7 @@ int nodesCount;
 
 int main(int argc, char** argv) {
 
-    double timeBegin, timeEnd;
-
+	double wall_time = omp_get_wtime();
 
 	int numThreads = omp_get_max_threads();
 
@@ -28,7 +27,8 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
-#pragma omp parallel for num_threads(numThreads)
+
+// #pragma omp parallel for num_threads(numThreads)
 	for (int i = 0; i < MAX; ++i) {
 		for (int j = 0; j < MAX; ++j) {
 			distance[i][j] = NOT_CONNECTED;
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
 
 	fscanf(in_file, "%d", &nodesCount);
 
-#pragma omp barrier
+// #pragma omp barrier
 
 	int a, b, c;
 	while (fscanf(in_file, "%d %d %d", &a, &b, &c) != EOF) {
@@ -50,11 +50,9 @@ int main(int argc, char** argv) {
 		distance[a][b] = c;
 	}
 
-    timeBegin = omp_get_wtime();
-
 	//Floyd-Warshall
 	for (int k = 1; k <= nodesCount; ++k) {
-#pragma omp parallel for num_threads(numThreads)
+// #pragma omp parallel for num_threads(numThreads)
 		for (int i = 1; i <= nodesCount; ++i) {
 			if (distance[i][k] != NOT_CONNECTED) {
 				for (int j = 1; j <= nodesCount; ++j) {
@@ -70,7 +68,7 @@ int main(int argc, char** argv) {
 
 	int diameter = -1;
 	//look for the most distant pair
-#pragma omp parallel for num_threads(numThreads)
+// #pragma omp parallel for num_threads(numThreads)
 	for (int i = 1; i <= nodesCount; ++i) {
 		for (int j = 1; j <= nodesCount; ++j) {
 			if (diameter < distance[i][j]) {
@@ -80,10 +78,10 @@ int main(int argc, char** argv) {
 		}
 	}
 
-//	printf("%d\n", diameter);
-    timeEnd = omp_get_wtime();
-//	std::cout << "Running time is: " << omp_get_wtime() - wall_time << "s" << std::endl;
-    printf("%d %.16g\n", diameter, (timeEnd-timeBegin));
+	printf("%d\n", diameter);
+
+	std::cout << "Running time is: " << omp_get_wtime() - wall_time << "s" << std::endl;
+
 	return 0;
 
 }
