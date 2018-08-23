@@ -6,8 +6,8 @@
 `python graph_generator.py --vertices 9999`
 
 ### Compile with OpenMP directives
-`gcc -o3 -o graph.exe .\graph.cpp -lstdc++ -fopenmp`
-`g++ -o graph.exe graph.cpp -fopenmp`
+- `gcc -o3 -o graph.exe .\graph.cpp -lstdc++ -fopenmp` or
+- `g++ -o graph.exe graph.cpp -fopenmp`
 
 ### Execute the programs
 `./graph.exe ./graph[xxx].txt` ([xxx] is the number of vertices)
