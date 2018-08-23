@@ -33,5 +33,5 @@ g++ -o graph.exe graph.cpp -fopenmp
 # export OMP_NUM_THREADS=8
 
 # Execute the programs\
-graph.exe graphp[xxx].txt
+graph.exe graph[xxx].txt
 ```
