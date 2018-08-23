@@ -8,6 +8,9 @@ python graph_generator.py --vertices 9999
 ### Compile with OpenMP directives
 g++ -o graph.exe graph.cpp -fopenmp
 
+// If use gcc -o3, using following command:\
+// gcc -o3 -o graph.exe .\graph.cpp -lstdc++ -fopenmp
+
 ### Execute the programs
 ./graph.exe ./graph.txt
 
