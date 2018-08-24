@@ -6,7 +6,7 @@
 `python graph_generator.py --vertices 9999`
 
 ### Compile with OpenMP directives
-- `gcc -o3 -o graph.exe .\graph.cpp -lstdc++ -fopenmp` or
+- `gcc -o3 -o graph.exe graph.cpp -lstdc++ -fopenmp` or
 - `g++ -o graph.exe graph.cpp -fopenmp`
 
 
@@ -23,11 +23,10 @@
 #SBATCH --output=1n1c.out
 
 # Load required modules
-module load GCC/8.1.0
-module load binutils/2.30-GCCcore-8.1.0
+module load GCC/4.9.2
 
 # Compile with OpenMP directives
-g++ -o graph.exe graph.cpp -fopenmp
+gcc -o3 -o graph.exe graph.cpp -lstdc++ -fopenmp
 
 # Export with the number of threads desired\
 # export OMP_NUM_THREADS=8
